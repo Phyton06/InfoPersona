@@ -26,8 +26,8 @@ Aplicación académica Android para registrar personas mediante un formulario, a
 
 ## Preparar Supabase
 
-1. Crea un proyecto Supabase para la práctica y abre el SQL Editor.
-2. Ejecuta el contenido de `documentacion/supabase.sql` para crear `personas`, habilitar RLS, configurar el bucket `personas-fotos` y añadir las políticas limitadas a la demostración.
+1. Usa el proyecto Supabase asignado a la práctica y abre el SQL Editor. Si todavía no existe, crea uno en tu organización antes de continuar.
+2. Revisa el script: elimina cinco tablas públicas heredadas antes de crear `personas`. En el proyecto usado para la práctica se comprobó que estaban vacías; antes de ejecutarlo en cualquier otro proyecto, verifica que no contengan datos. El script no elimina otros esquemas ni buckets.
 3. Copia la URL y la clave **publishable** (o la clave pública `anon` compatible) en `android-app/local.properties`:
 
    ```properties
@@ -68,5 +68,7 @@ El APK generado se encuentra en `entregables/Practica_Formulario_Personas.apk`. 
 ```bash
 adb install -r ../entregables/Practica_Formulario_Personas.apk
 ```
+
+El APK Debug configurado se entrega en el repositorio. Incluye la URL y clave publishable configuradas localmente para el proyecto académico; nunca debe incluirse una clave `service_role`.
 
 La aplicación no incluye autenticación, roles, edición, eliminación de personas ni panel administrativo. Por instrucción académica no se incluyen ni ejecutan pruebas automatizadas.

@@ -1,5 +1,15 @@
 -- Esquema para una práctica académica con datos ficticios únicamente.
 -- Las políticas anónimas exponen los registros a cualquier persona con la URL pública.
+-- PRECAUCIÓN: este script elimina cinco tablas públicas heredadas antes de crear personas.
+-- Antes de ejecutarlo en otro proyecto, confirma que esas tablas no contienen datos.
+-- En el proyecto de esta práctica se verificó que las cinco estaban vacías.
+-- Se eliminan solo esas tablas antiguas, en orden de dependencia, sin usar CASCADE.
+
+drop table if exists public.ban_history;
+drop table if exists public.last_rides;
+drop table if exists public.passengers;
+drop table if exists public.drivers;
+drop table if exists public.coordenadas;
 
 create table if not exists public.personas (
     id uuid primary key default gen_random_uuid(),

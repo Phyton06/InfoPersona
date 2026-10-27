@@ -27,9 +27,9 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 
 ## Tasks
 
-- T1 — S1 — inline — complete — `4b0efcc`; `:app:assembleDebug` succeeded; initial direct push to remote `main` is `cec7fec`; runtime needs the user's Supabase public configuration.
-- T2 — S2 — inline — complete — `103f00f`; `:app:assembleDebug` succeeded; Supabase runtime remains unconfigured.
-- T3 — S3 — inline — in progress — report/screenshots pushed through `59caba8`; Supabase project setup and final APK export pending.
+- T1 — S1 — inline — complete — `4b0efcc`; Debug build passes; live save requires a location provider with valid MSL altitude.
+- T2 — S2 — inline — complete — `103f00f`; Debug build and live empty-list query pass; details with a record not exercised.
+- T3 — S3 — inline — in progress — configured APK exported locally; final work-unit commit and emulator save/details proof pending.
 
 ## Log
 
@@ -116,3 +116,11 @@ The user authorized inspecting and applying `documentacion/supabase.sql` to the 
 ### L21 — 2026-10-26
 
 The user asked “cambialo” to switch the active Supabase MCP connection. The available MCP tools expose project URL retrieval but no operation to change the selected project or connection. No Supabase config, project, schema, or credentials were changed or re-read. The user must update the MCP connection to the supplied project URL and notify when ready.
+
+### L22 — 2026-10-26
+
+The user identified the MCP-connected project as the intended project, supplied its public client URL/key, and authorized replacement of the old test tables. The MCP URL matched. Pre-migration inspection found five legacy public tables (`drivers`, `passengers`, `ban_history`, `last_rides`, `coordenadas`), all with zero rows, and no Storage buckets. Applied migration `replace_legacy_test_tables_with_personas`: dropped only those old tables (without `CASCADE`), created `public.personas` with RLS, and created the public `personas-fotos` bucket and bucket-scoped policies. Post-migration inspection confirms `personas` exists with zero rows and the bucket is public with zero objects. Security advisor reports leaked-password protection disabled for Supabase Auth; this app has no authentication, so the setting was not changed. Local SQL/README now reflect the replacement; local properties still need configuration before the final APK.
+
+### L23 — 2026-10-26
+
+The user clarified that the currently MCP-connected project is the intended one and supplied its publishable URL/key. Mapped these values into ignored `android-app/local.properties` (not tracked). Rebuilt the configured Debug APK successfully; installed it in the emulator and the live Supabase list query returned the exact empty state `No hay personas registradas.` The migration and bucket are verified with zero rows/objects. Copied the 75,161,351-byte APK to `entregables/Practica_Formulario_Personas.apk`. No sample row was inserted: the emulator does not provide MSL altitude, so the form correctly blocks saving; success Snackbar and populated details remain unverified. No tests were created or run.

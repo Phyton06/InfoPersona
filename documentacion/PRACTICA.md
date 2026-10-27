@@ -59,9 +59,11 @@ El archivo `documentacion/supabase.sql` crea `personas`, habilita Row Level Secu
 
 ## 10. Resultados
 
-La variante Debug compila con Gradle. El código solicita ordenar los registros por primer apellido y presenta fecha y hora por separado en los detalles. La consulta y el guardado reales aún requieren configuración del proyecto Supabase.
+La variante Debug compila con Gradle. Se aplicó `documentacion/supabase.sql` al proyecto Supabase seleccionado: las cinco tablas públicas heredadas estaban vacías, se sustituyeron por `personas`, y se creó el bucket público `personas-fotos` sin objetos. El cliente Android se configuró localmente con la URL y clave publishable; la consulta real devolvió el estado vacío. El código ordena la lista por primer apellido y separa fecha y hora en los detalles.
 
-Se instaló la aplicación en el emulador Android 36 (Google APIs, perfil de teléfono) y se capturaron pantallas reales. La ubicación mostrada, Mountain View (`37.421998`, `-122.084000`), es la reportada por el emulador, no por un teléfono físico. El proveedor no informó altitud MSL válida, así que el campo quedó vacío. La URL y clave pública de Supabase no están configuradas; el guardado, Snackbar de éxito, lista con registros, detalles de un registro y capturas de la tabla real siguen pendientes.
+El APK Debug configurado se exportó a `entregables/Practica_Formulario_Personas.apk` (75,161,351 bytes). La clave incluida es publishable y no se usa `service_role`.
+
+Se instaló la aplicación en el emulador Android 36 (Google APIs, perfil de teléfono) y se capturaron pantallas reales. La ubicación mostrada, Mountain View (`37.421998`, `-122.084000`), es la reportada por el emulador, no por un teléfono físico. El proveedor no informó altitud MSL válida, así que el campo quedó vacío y no fue posible guardar desde el emulador. No se insertaron registros de prueba. Por eso, el Snackbar de éxito y el diálogo de detalles con un registro real siguen sin captura. La configuración local de Supabase está ignorada por Git.
 
 ### Capturas para el reporte
 
@@ -99,19 +101,21 @@ Las coordenadas y la localidad siguientes son las devueltas por el entorno virtu
 
 **Snackbar de éxito**
 
-> [Pendiente: configurar URL y clave pública de Supabase y capturar el Snackbar después de guardar un registro de prueba.]
+> [Pendiente: requiere un proveedor de ubicación que informe altitud MSL válida y autorización para guardar un registro ficticio en Supabase.]
 
 **Lista de personas**
 
-> [Pendiente: configurar Supabase y capturar registros de demostración ordenados por primer apellido.]
+![Lista vacía consultada desde el proyecto Supabase configurado](capturas/lista-vacia.png)
 
 **Vista de detalles**
 
-> [Pendiente: configurar Supabase y capturar un registro de demostración en el diálogo de detalles.]
+> [Pendiente: no se insertó un registro de prueba; requiere autorización para crear datos ficticios y una altitud MSL válida para el flujo del formulario.]
 
 **Tabla y almacenamiento en Supabase**
 
-> [Pendiente: ejecutar `documentacion/supabase.sql` en el proyecto académico y agregar capturas reales de la tabla `personas` y el bucket `personas-fotos`.]
+La migración se ejecutó y se verificó la tabla `personas` (0 filas) y el bucket público `personas-fotos` (0 objetos) mediante Supabase MCP. No se capturó una imagen del panel web de Supabase.
+
+> [Espacio para una captura real del panel Supabase con la tabla `personas` y el bucket `personas-fotos`]
 
 ## 11. Conclusiones
 
