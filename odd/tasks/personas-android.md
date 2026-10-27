@@ -108,3 +108,7 @@ The user requested “crea un proyecto”. The available Supabase MCP operations
 ### L19 — 2026-10-26
 
 Installed Supabase CLI 2.122.0 through the approved local tool-install request. The MCP still has no project-creation operation. No Supabase project, schema, or credentials were queried or changed. To create the project, the user must specify the organization and region, authorize the Supabase CLI session, and arrange a database password locally; possible billing must also be confirmed.
+
+### L20 — 2026-10-26
+
+The user authorized inspecting and applying `documentacion/supabase.sql` to the supplied project. The read-only MCP project URL check returned a different project from the supplied URL. Stopped before listing tables, reading keys/advisories, or applying SQL; no database/schema/data changes were made. Waiting for the MCP connection to target the supplied project.
