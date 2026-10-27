@@ -29,7 +29,7 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 
 - T1 — S1 — inline — complete — `4b0efcc`; Debug build passes; live save requires a location provider with valid MSL altitude.
 - T2 — S2 — inline — complete — `103f00f`; Debug build and live empty-list query pass; details with a record not exercised.
-- T3 — S3 — inline — complete — configured APK exported locally; runtime save/details proof remains unavailable on this emulator.
+- T3 — S3 — inline — complete — commit `08e454b`; configured APK exported and pushed to `main`; runtime save/details proof remains unavailable on this emulator.
 
 ## Log
 
@@ -128,3 +128,11 @@ The user clarified that the currently MCP-connected project is the intended one 
 ### L24 — 2026-10-26
 
 Rebuilt the configured APK with `./gradlew --offline --no-daemon --rerun-tasks :app:assembleDebug` (`BUILD SUCCESSFUL`, 38 tasks), then copied and verified it as `entregables/Practica_Formulario_Personas.apk` (75,161,351 bytes). On the emulator, the configured app successfully queried Supabase and displayed `No hay personas registradas.` The database contains `public.personas` with RLS enabled and zero rows; `personas-fotos` is public with zero objects. No demo record was inserted. The emulator location provider lacks MSL altitude, so the form correctly blocks saving; success Snackbar and populated details have no runtime screenshot. The existing Supabase Auth advisory about leaked-password protection was not changed because this app has no authentication. No tests were created or run.
+
+### L25 — 2026-10-26
+
+Committed S3 as `08e454b` (`feat(personas): configure Supabase and export Debug APK`) and pushed it to `Phyton06/InfoPersona:main`; the task-tracker update was pushed as `eb481d1`. The remote main was verified to match local HEAD. GitHub accepted the APK but warned it exceeds the recommended 50 MB file size (it is under the blocking 100 MB limit). `android-app/local.properties` remains ignored; only the public client configuration is embedded in the APK.
+
+### L26 — 2026-10-26
+
+Updated the report with the actual empty-list screenshot after the configured app queried Supabase successfully. Updated SQL/README warnings to explain the authorized replacement of the five empty legacy test tables. Final APK remains at `entregables/Practica_Formulario_Personas.apk` and is committed. The form cannot be submitted in this emulator because its provider has no valid MSL altitude; no success Snackbar or populated-details capture was fabricated. No test sources or test runs.
