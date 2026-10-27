@@ -28,7 +28,7 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 ## Tasks
 
 - T1 — S1 — inline — complete — `4b0efcc`; `:app:assembleDebug` succeeded; initial direct push to remote `main` is `cec7fec`; runtime needs the user's Supabase public configuration.
-- T2 — S2 — inline — in progress — `:app:assembleDebug` succeeded; work-unit commit pending.
+- T2 — S2 — inline — complete — `103f00f`; `:app:assembleDebug` succeeded; Supabase runtime remains unconfigured.
 - T3 — S3 — inline — pending — no commit.
 
 ## Log
@@ -76,3 +76,7 @@ Performed the user-selected direct initialization push with `git push origin HEA
 ### L11 — 2026-10-26
 
 Implemented S2 with a Supabase query ordered by `primer_apellido`, a refreshable `LazyColumn` of Material cards, Coil-loaded shaped photos, active/inactive labels, and read-only details containing all fields with registration date/time split. Coil 3.6.3 was incompatible with SDK 36/AGP 9.0.1 (required API 37/AGP 9.1); version 3.3.0 is compatible. The decoder is a `PostgrestResult` member (`decodeList`), not a top-level import. `./gradlew --no-daemon :app:assembleDebug` succeeded (38 tasks); no tests were created or run. Independent S2 verification found the list/details requirements met by inspection; its demo-policy advisory is already explicit in SQL comments at lines 1–2 and README warnings. The updated debug APK is larger (116,508,645 bytes); it remains a Debug APK and S3 export is still pending.
+
+### L12 — 2026-10-26
+
+Committed S2 as `103f00f` (`feat(personas): add people list and details`). Build succeeded and the independent S2 review found the list/details requirements met by inspection; no tests were created or run. Supabase URL/key are still not configured, so live query behavior has not been exercised. The remote `main` still needs this work unit pushed; S3 documentation/APK export remains pending.
