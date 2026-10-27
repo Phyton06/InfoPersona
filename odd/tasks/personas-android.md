@@ -29,7 +29,7 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 
 - T1 — S1 — inline — complete — `4b0efcc`; Debug build passes; live save requires a location provider with valid MSL altitude.
 - T2 — S2 — inline — complete — `103f00f`; Debug build and live empty-list query pass; details with a record not exercised.
-- T3 — S3 — inline — in progress — configured APK exported locally; final work-unit commit and emulator save/details proof pending.
+- T3 — S3 — inline — complete — configured APK exported locally; runtime save/details proof remains unavailable on this emulator.
 
 ## Log
 
@@ -124,3 +124,7 @@ The user identified the MCP-connected project as the intended project, supplied 
 ### L23 — 2026-10-26
 
 The user clarified that the currently MCP-connected project is the intended one and supplied its publishable URL/key. Mapped these values into ignored `android-app/local.properties` (not tracked). Rebuilt the configured Debug APK successfully; installed it in the emulator and the live Supabase list query returned the exact empty state `No hay personas registradas.` The migration and bucket are verified with zero rows/objects. Copied the 75,161,351-byte APK to `entregables/Practica_Formulario_Personas.apk`. No sample row was inserted: the emulator does not provide MSL altitude, so the form correctly blocks saving; success Snackbar and populated details remain unverified. No tests were created or run.
+
+### L24 — 2026-10-26
+
+Rebuilt the configured APK with `./gradlew --offline --no-daemon --rerun-tasks :app:assembleDebug` (`BUILD SUCCESSFUL`, 38 tasks), then copied and verified it as `entregables/Practica_Formulario_Personas.apk` (75,161,351 bytes). On the emulator, the configured app successfully queried Supabase and displayed `No hay personas registradas.` The database contains `public.personas` with RLS enabled and zero rows; `personas-fotos` is public with zero objects. No demo record was inserted. The emulator location provider lacks MSL altitude, so the form correctly blocks saving; success Snackbar and populated details have no runtime screenshot. The existing Supabase Auth advisory about leaked-password protection was not changed because this app has no authentication. No tests were created or run.
