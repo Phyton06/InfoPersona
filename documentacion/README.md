@@ -2,45 +2,71 @@
 
 ## Objetivo
 
-Aplicación académica Android para capturar información personal, una fotografía y datos de ubicación con Kotlin, Jetpack Compose y Material Design 3.
+Aplicación académica Android para registrar personas mediante un formulario, almacenar fotografías y ubicación, y consultar los registros en Supabase.
 
-> La configuración anónima de Supabase de esta práctica es solo para una demostración con datos ficticios. No almacenes información personal real: las políticas permiten que cualquier cliente público consulte los registros y suba o elimine objetos del bucket.
+> **Uso académico únicamente:** las políticas anónimas de demostración permiten a cualquier cliente público consultar los datos y subir o eliminar objetos del bucket. Utiliza solo datos ficticios; no almacenes información personal real.
 
-## Tecnologías y estructura
+## Tecnologías
 
-- Kotlin, Jetpack Compose y Material Design 3.
-- Noto Sans incluida como fuente local.
-- El archivo Noto Sans se distribuye bajo SIL Open Font License 1.1.
-- Cliente comunitario Supabase Kotlin para PostgreSQL y Storage.
-- Coil 3 para cargar las fotografías almacenadas por URL en Compose.
-- `android-app/app/src/main/kotlin/mx/edu/personas/ui/screens/PersonFormScreen.kt`: formulario y estado de pantalla.
-- `android-app/app/src/main/kotlin/mx/edu/personas/data/repository/PersonRepository.kt`: carga de fotografía e inserción del registro.
-- `android-app/app/src/main/kotlin/mx/edu/personas/ui/screens/PeopleListDialog.kt`: lista ordenada y detalles de consulta.
-- `android-app/app/src/main/kotlin/mx/edu/personas/utils/LocationProvider.kt`: permiso, coordenadas, altitud MSL y geocodificación inversa.
-- `documentacion/supabase.sql`: tabla, bucket y políticas de demostración.
+- Kotlin 2.3, Jetpack Compose y Material Design 3.
+- Noto Sans como fuente local; paleta Indigo 500/700 y Teal 500.
+- Supabase Kotlin 3.8 para PostgreSQL y Storage; Coil 3.3 para las fotografías remotas.
+- Android Gradle Plugin 9.0.1, Gradle Wrapper 9.1, JDK 17, `minSdk` 30 y `compileSdk` 36.
 
-## Configuración de Supabase
+## Estructura principal
 
-1. Crea un proyecto Supabase académico y abre el SQL Editor.
-2. Ejecuta el contenido de `documentacion/supabase.sql`.
-3. Copia la URL del proyecto y su clave **publishable** (o clave pública `anon` compatible) en `android-app/local.properties`:
+- `android-app/app/src/main/kotlin/mx/edu/personas/MainActivity.kt`: inicio de Compose y MaterialTheme.
+- `ui/screens/PersonFormScreen.kt`: formulario, validaciones, selección de imagen y permisos.
+- `ui/screens/PeopleListDialog.kt`: lista ordenada, actualización y detalles de solo consulta.
+- `data/model/Person.kt`: modelos del formulario y de los datos serializados.
+- `data/repository/PersonRepository.kt`: inserción, consulta ordenada, carga y limpieza de fotografías.
+- `utils/LocationProvider.kt`: ubicación en primer plano, geocodificación y altitud MSL.
+- `ui/theme/`: colores, tipografía Noto Sans y tema Material 3.
+- `documentacion/supabase.sql`: tabla, bucket y políticas académicas.
+
+## Preparar Supabase
+
+1. Crea un proyecto Supabase para la práctica y abre el SQL Editor.
+2. Ejecuta el contenido de `documentacion/supabase.sql` para crear `personas`, habilitar RLS, configurar el bucket `personas-fotos` y añadir las políticas limitadas a la demostración.
+3. Copia la URL y la clave **publishable** (o la clave pública `anon` compatible) en `android-app/local.properties`:
 
    ```properties
    supabase.url=https://TU-PROYECTO.supabase.co
    supabase.publishableKey=TU_CLAVE_PUBLICA
    ```
 
-4. Mantén ese archivo local: está excluido de Git. No uses `service_role`, claves secretas ni las compartas en capturas o entregas.
-5. Abre `android-app/` en Android Studio y compila la variante Debug. Si no has configurado ambos valores, el proyecto aún compila, pero el botón de guardado indicará que falta la configuración.
+4. Conserva `local.properties` solo en tu equipo; está excluido de Git. No uses `service_role` ni claves secretas, y no las compartas en capturas o entregas.
+5. Si faltan esos valores, el proyecto compila, pero las consultas y el guardado muestran un error de configuración hasta agregarlos.
 
-La tabla `personas` almacena hobbies en JSONB y deja que PostgreSQL asigne el UUID y `fecha_registro = now()`. La aplicación comprime la fotografía a JPEG, la carga en `personas-fotos` y guarda su URL pública en la fila. Si falla la inserción, intenta eliminar la imagen recién cargada.
+La tabla almacena hobbies como JSONB. PostgreSQL genera el UUID y `fecha_registro` con `now()`; la aplicación no envía esos campos al insertar. La foto se convierte a JPEG, se carga con un nombre UUID y se guarda su URL pública. Si falla la carga o la inserción, la aplicación intenta borrar el objeto recién reservado.
 
-## Formulario
+## Pantallas y componentes
 
-El formulario usa `TextField`, Checkbox, lista desplegable Material 3, selección de género con iconos y etiquetas visibles, RadioButton, Slider, DatePicker y FilterChip. La edad se compara con la fecha de nacimiento considerando año, mes y día. El selector impide fechas futuras. La segunda vista usa `LazyColumn`, muestra la foto y el estado, ordena por primer apellido y abre un diálogo de detalles de solo consulta.
+La barra inferior permite alternar entre **Registrar** y **Personas**. El formulario emplea campos de texto controlados, Checkbox para varios hobbies, menú desplegable para estado civil, iconos con etiquetas para género, RadioButton para estudios y estado, Slider entero de edad, DatePicker sin fechas futuras y FilterChip para estación. El Snackbar confirma el resultado. La edad calculada desde año, mes y día debe coincidir con el Slider.
 
-La galería se abre con Photo Picker, que solo concede acceso al elemento elegido. La cámara recibe una URI temporal mediante `FileProvider`. Para ubicación se solicita permiso en primer plano al pulsar el botón; no se pide ubicación en segundo plano. La localidad se obtiene mediante geocodificación inversa. La altitud solo se muestra/guarda cuando Android 14 o posterior y el proveedor informan altitud sobre el nivel medio del mar (MSL); nunca se sustituye por la altitud elipsoidal del GPS.
+La lista consulta Supabase cada vez que se abre, ordena por primer apellido ascendente y ofrece actualización manual. Cada tarjeta muestra fotografía, nombre y estado; `DETALLES` abre una vista de consulta que presenta todos los campos, incluida la fecha y hora de registro por separado.
 
-## Restricciones académicas
+## Fotografías y ubicación
 
-No se incluyen autenticación, edición, eliminación de personas, paneles administrativos ni archivos o dependencias de pruebas. Los registros conservan sus campos capturados si falla el guardado para permitir reintentar.
+Photo Picker limita el acceso a la foto elegida. La cámara escribe en una URI temporal de `FileProvider`. Coil muestra las URL públicas en Compose.
+
+La ubicación se solicita en primer plano al pulsar el botón; no se solicita acceso en segundo plano. Se muestran latitud, longitud y localidad obtenida por geocodificación inversa. La altitud solo se guarda cuando Android 14 o posterior y el proveedor ofrecen altitud sobre el nivel medio del mar (MSL); no se usa la altitud elipsoidal del GPS como sustituto. Si faltan localidad o altitud válida, no se permite guardar.
+
+## Compilar e instalar
+
+Desde la raíz del repositorio:
+
+```bash
+cd android-app
+./gradlew :app:assembleDebug
+mkdir -p ../entregables
+cp app/build/outputs/apk/debug/app-debug.apk ../entregables/Practica_Formulario_Personas.apk
+```
+
+El APK generado se encuentra en `entregables/Practica_Formulario_Personas.apk`. Para instalarlo en un dispositivo conectado:
+
+```bash
+adb install -r ../entregables/Practica_Formulario_Personas.apk
+```
+
+La aplicación no incluye autenticación, roles, edición, eliminación de personas ni panel administrativo. Por instrucción académica no se incluyen ni ejecutan pruebas automatizadas.

@@ -29,7 +29,7 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 
 - T1 — S1 — inline — complete — `4b0efcc`; `:app:assembleDebug` succeeded; initial direct push to remote `main` is `cec7fec`; runtime needs the user's Supabase public configuration.
 - T2 — S2 — inline — complete — `103f00f`; `:app:assembleDebug` succeeded; Supabase runtime remains unconfigured.
-- T3 — S3 — inline — pending — no commit.
+- T3 — S3 — inline — in progress — README/report written; configured APK export pending.
 
 ## Log
 
@@ -80,3 +80,11 @@ Implemented S2 with a Supabase query ordered by `primer_apellido`, a refreshable
 ### L12 — 2026-10-26
 
 Committed S2 as `103f00f` (`feat(personas): add people list and details`). Build succeeded and the independent S2 review found the list/details requirements met by inspection; no tests were created or run. Supabase URL/key are still not configured, so live query behavior has not been exercised. The remote `main` still needs this work unit pushed; S3 documentation/APK export remains pending.
+
+### L13 — 2026-10-26
+
+Pushed the S2 work unit and tracker update to remote `main` (`103f00f` and `7e9acb3`). T3 is now in progress: complete Spanish README and academic report, check for a real Android device/emulator for screenshots, then rebuild and export the Debug APK. Supabase public URL/key remain unconfigured; no live backend claims or fake screenshots. No tests are created or run.
+
+### L14 — 2026-10-26
+
+Expanded `documentacion/README.md` and added `documentacion/PRACTICA.md` with the required report sections and explicit placeholders for every requested screenshot. `adb devices -l` returned no connected device; `android emulator list` was empty, so no screenshots were fabricated. The current Debug APK is about 116.5 MB and is not part of the Git push; the required copy to `entregables/Practica_Formulario_Personas.apk` remains pending. Supabase URL and public key are still absent, so ask the user to configure the ignored `android-app/local.properties` before producing the final configured APK.
