@@ -29,7 +29,7 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 
 - T1 — S1 — inline — complete — `4b0efcc`; `:app:assembleDebug` succeeded; initial direct push to remote `main` is `cec7fec`; runtime needs the user's Supabase public configuration.
 - T2 — S2 — inline — complete — `103f00f`; `:app:assembleDebug` succeeded; Supabase runtime remains unconfigured.
-- T3 — S3 — inline — in progress — docs commit `7c5be17` pushed; configured APK export pending Supabase values.
+- T3 — S3 — inline — in progress — report includes emulator captures; Supabase setup and configured APK export pending.
 
 ## Log
 
@@ -92,3 +92,7 @@ Expanded `documentacion/README.md` and added `documentacion/PRACTICA.md` with th
 ### L15 — 2026-10-26
 
 Committed and pushed the Spanish README/report as `7c5be17` to remote `main`. T3 remains open only for the configured final APK export; no live Supabase connection has been exercised. The Debug APK is about 116.5 MB, so it remains a local deliverable rather than a GitHub-tracked file. The original `task.md` remains untracked; local Supabase configuration remains ignored.
+
+### L16 — 2026-10-26
+
+The user asked for an emulator and noted Supabase MCP availability. Installed Android Emulator 37.2.12 and an Android 36 Google APIs image, created and started `medium_phone` using the local AVD directory (the ambient `ANDROID_AVD_HOME` initially pointed elsewhere). Installed/launched the app without debugger wait. Captured real emulator screenshots for the form, Photo Picker, camera, selection components, runtime location permission, and location fields under `documentacion/capturas/`. The emulator reported Mountain View coordinates and no MSL altitude; report labels these as virtual-device output, not physical-device GPS. Success Snackbar, populated list/details, and actual Supabase table/bucket screenshots remain unavailable because credentials/project are not configured. No Supabase MCP calls were made; project destination and authorization to apply the SQL migration are still needed.

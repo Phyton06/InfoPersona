@@ -59,43 +59,59 @@ El archivo `documentacion/supabase.sql` crea `personas`, habilita Row Level Secu
 
 ## 10. Resultados
 
-La variante Debug compila con Gradle. La consulta de registros solicita orden ascendente por primer apellido; la vista de detalles muestra la información guardada y separa fecha y hora del registro.
+La variante Debug compila con Gradle. El código solicita ordenar los registros por primer apellido y presenta fecha y hora por separado en los detalles. La consulta y el guardado reales aún requieren configuración del proyecto Supabase.
 
-La URL y clave pública de Supabase no están incluidas en el repositorio. Por ello, la conexión real y el guardado/consulta en un proyecto Supabase deben verificarse después de agregarlas localmente a `android-app/local.properties`. En este entorno no había un emulador ni dispositivo conectado, así que no se tomaron capturas reales. Los espacios siguientes son marcadores para insertar capturas auténticas al ejecutar la aplicación.
+Se instaló la aplicación en el emulador Android 36 (Google APIs, perfil de teléfono) y se capturaron pantallas reales. La ubicación mostrada, Mountain View (`37.421998`, `-122.084000`), es la reportada por el emulador, no por un teléfono físico. El proveedor no informó altitud MSL válida, así que el campo quedó vacío. La URL y clave pública de Supabase no están configuradas; el guardado, Snackbar de éxito, lista con registros, detalles de un registro y capturas de la tabla real siguen pendientes.
 
 ### Capturas para el reporte
 
 **Formulario**
 
-> [Espacio para captura real del formulario completo]
+![Formulario ejecutándose en el emulador](capturas/formulario-inicial.png)
 
 **Selección de fotografía**
 
-> [Espacio para captura real del selector de fotos o cámara]
+Selector del sistema, sin fotografías disponibles en el emulador:
+
+![Photo Picker del emulador](capturas/seleccion-fotografia.png)
+
+Vista de cámara del emulador:
+
+![Cámara del emulador](capturas/camara.png)
 
 **Componentes de selección**
 
-> [Espacio para captura real de hobbies, género, estudios y chips]
+![Hobbies, estado civil, género y estudios](capturas/componentes-seleccion.png)
+
+![Slider, fecha de nacimiento, chips y acceso a ubicación](capturas/edad-fecha-estacion.png)
 
 **Ubicación automática**
 
-> [Espacio para captura real de coordenadas, altitud MSL y localidad]
+La autorización fue concedida en el emulador; esta captura muestra el diálogo de permisos:
+
+![Permiso de ubicación en Android](capturas/permiso-ubicacion.png)
+
+Las coordenadas y la localidad siguientes son las devueltas por el entorno virtual. El proveedor no ofreció altitud MSL válida y el campo permanece vacío:
+
+![Ubicación informada por el emulador y altitud MSL no disponible](capturas/ubicacion-detalle.png)
+
+![Campos automáticos de ubicación en el emulador](capturas/ubicacion-campos.png)
 
 **Snackbar de éxito**
 
-> [Espacio para captura real tras guardar en el proyecto Supabase configurado]
+> [Pendiente: configurar URL y clave pública de Supabase y capturar el Snackbar después de guardar un registro de prueba.]
 
 **Lista de personas**
 
-> [Espacio para captura real de la lista ordenada por primer apellido]
+> [Pendiente: configurar Supabase y capturar registros de demostración ordenados por primer apellido.]
 
 **Vista de detalles**
 
-> [Espacio para captura real del diálogo de consulta]
+> [Pendiente: configurar Supabase y capturar un registro de demostración en el diálogo de detalles.]
 
 **Tabla y almacenamiento en Supabase**
 
-> [Espacio para capturas reales de la tabla `personas` y el bucket `personas-fotos`]
+> [Pendiente: ejecutar `documentacion/supabase.sql` en el proyecto académico y agregar capturas reales de la tabla `personas` y el bucket `personas-fotos`.]
 
 ## 11. Conclusiones
 
