@@ -29,7 +29,7 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 
 - T1 — S1 — inline — complete — `4b0efcc`; `:app:assembleDebug` succeeded; initial direct push to remote `main` is `cec7fec`; runtime needs the user's Supabase public configuration.
 - T2 — S2 — inline — complete — `103f00f`; `:app:assembleDebug` succeeded; Supabase runtime remains unconfigured.
-- T3 — S3 — inline — in progress — README/report written; configured APK export pending.
+- T3 — S3 — inline — in progress — docs commit `7c5be17` pushed; configured APK export pending Supabase values.
 
 ## Log
 
@@ -88,3 +88,7 @@ Pushed the S2 work unit and tracker update to remote `main` (`103f00f` and `7e9a
 ### L14 — 2026-10-26
 
 Expanded `documentacion/README.md` and added `documentacion/PRACTICA.md` with the required report sections and explicit placeholders for every requested screenshot. `adb devices -l` returned no connected device; `android emulator list` was empty, so no screenshots were fabricated. The current Debug APK is about 116.5 MB and is not part of the Git push; the required copy to `entregables/Practica_Formulario_Personas.apk` remains pending. Supabase URL and public key are still absent, so ask the user to configure the ignored `android-app/local.properties` before producing the final configured APK.
+
+### L15 — 2026-10-26
+
+Committed and pushed the Spanish README/report as `7c5be17` to remote `main`. T3 remains open only for the configured final APK export; no live Supabase connection has been exercised. The Debug APK is about 116.5 MB, so it remains a local deliverable rather than a GitHub-tracked file. The original `task.md` remains untracked; local Supabase configuration remains ignored.
