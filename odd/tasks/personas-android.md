@@ -27,9 +27,9 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 
 ## Tasks
 
-- T1 — S1 — inline — complete — `4b0efcc`; Debug build passes; live save requires a location provider with valid MSL altitude.
+- T1 — S1 — inline — complete — `4b0efcc`; Debug build passes; physical device supplies MSL, end-to-end save awaits demo-photo permission.
 - T2 — S2 — inline — complete — `103f00f`; Debug build and live empty-list query pass; details with a record not exercised.
-- T3 — S3 — inline — complete — commit `08e454b`; configured APK exported and pushed to `main`; runtime save/details proof remains unavailable on this emulator.
+- T3 — S3 — inline — complete — commit `08e454b`; configured APK exported and pushed to `main`; runtime save/details proof awaits an approved demo photo/record.
 
 ## Log
 
@@ -136,3 +136,7 @@ Committed S3 as `08e454b` (`feat(personas): configure Supabase and export Debug 
 ### L26 — 2026-10-26
 
 Updated the report with the actual empty-list screenshot after the configured app queried Supabase successfully. Updated SQL/README warnings to explain the authorized replacement of the five empty legacy test tables. Final APK remains at `entregables/Practica_Formulario_Personas.apk` and is committed. The form cannot be submitted in this emulator because its provider has no valid MSL altitude; no success Snackbar or populated-details capture was fabricated. No test sources or test runs.
+
+### L27 — 2026-10-26
+
+The user explicitly approved one fictitious record using the physical phone's MSL location, after being warned that the database is publicly readable. The connected phone now reports valid MSL altitude; no row, photograph, or location has been saved yet. Before a record can be submitted, the app requires a photo that will be uploaded to the public `personas-fotos` bucket, so explicit permission for a non-identifying demo image is still needed.
