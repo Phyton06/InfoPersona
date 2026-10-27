@@ -27,7 +27,7 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 
 ## Tasks
 
-- T1 — S1 — inline — in progress — `:app:assembleDebug` succeeded; work-unit commit and Supabase credentials pending.
+- T1 — S1 — inline — complete — `4b0efcc`; `:app:assembleDebug` succeeded; runtime needs the user's Supabase public configuration.
 - T2 — S2 — inline — pending — no commit.
 - T3 — S3 — inline — pending — no commit.
 
@@ -64,3 +64,7 @@ The user confirmed authorization to use the currently configured GitHub CLI sess
 ### L8 — 2026-10-26
 
 The user selected “1” from the two delivery choices, authorizing the initial direct push to initialize `main` without a PR. The remote repository was confirmed to have no branches; no issue was found in the project-specific searches. Use the previously authorized GitHub CLI session, keep local `local.properties` excluded, and do not create or run tests.
+
+### L9 — 2026-10-26
+
+Committed S1 as `4b0efcc` (`feat(personas): add Compose registration and Supabase setup`) on local branch `feature/personas-android`. The Debug build and static verification succeeded; no tests were created or run. The remote `main` has not yet been initialized; the next authorized operation is the user's selected initial direct push to `Phyton06/InfoPersona:main`. `task.md` and ignored `android-app/local.properties` were not included in the commit.
