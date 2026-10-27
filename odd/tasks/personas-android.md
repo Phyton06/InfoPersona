@@ -29,7 +29,7 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 
 - T1 — S1 — inline — complete — `4b0efcc`; `:app:assembleDebug` succeeded; initial direct push to remote `main` is `cec7fec`; runtime needs the user's Supabase public configuration.
 - T2 — S2 — inline — complete — `103f00f`; `:app:assembleDebug` succeeded; Supabase runtime remains unconfigured.
-- T3 — S3 — inline — in progress — report/screenshots pushed through `59caba8`; Supabase configuration and final APK export pending.
+- T3 — S3 — inline — in progress — report/screenshots pushed through `59caba8`; Supabase project setup and final APK export pending.
 
 ## Log
 
@@ -104,3 +104,7 @@ Committed and pushed the real emulator screenshots and report updates as `59caba
 ### L18 — 2026-10-26
 
 The user requested “crea un proyecto”. The available Supabase MCP operations do not include project creation, so no project or database resource was created. Creating a Supabase project requires an explicit organization, region, credential/session authorization, and a locally supplied database password; destination and cost-related settings are unresolved.
+
+### L19 — 2026-10-26
+
+Installed Supabase CLI 2.122.0 through the approved local tool-install request. The MCP still has no project-creation operation. No Supabase project, schema, or credentials were queried or changed. To create the project, the user must specify the organization and region, authorize the Supabase CLI session, and arrange a database password locally; possible billing must also be confirmed.
