@@ -100,3 +100,7 @@ The user asked for an emulator and noted Supabase MCP availability. Installed An
 ### L17 — 2026-10-26
 
 Committed and pushed the real emulator screenshots and report updates as `59caba8` to remote `main`. Supabase MCP has not been called: the project reference/URL and authorization to retrieve publishable configuration or apply `documentacion/supabase.sql` are not yet established. The app remains buildable but its Supabase URL/key are blank; final configured APK export is still pending.
+
+### L18 — 2026-10-26
+
+The user requested “crea un proyecto”. The available Supabase MCP operations do not include project creation, so no project or database resource was created. Creating a Supabase project requires an explicit organization, region, credential/session authorization, and a locally supplied database password; destination and cost-related settings are unresolved.
