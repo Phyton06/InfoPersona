@@ -28,7 +28,7 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 ## Tasks
 
 - T1 — S1 — inline — complete — `4b0efcc`; `:app:assembleDebug` succeeded; initial direct push to remote `main` is `cec7fec`; runtime needs the user's Supabase public configuration.
-- T2 — S2 — inline — in progress — commit pending.
+- T2 — S2 — inline — in progress — `:app:assembleDebug` succeeded; work-unit commit pending.
 - T3 — S3 — inline — pending — no commit.
 
 ## Log
@@ -72,3 +72,7 @@ Committed S1 as `4b0efcc` (`feat(personas): add Compose registration and Supabas
 ### L10 — 2026-10-26
 
 Performed the user-selected direct initialization push with `git push origin HEAD:main`; GitHub accepted the new branch. `git ls-remote origin refs/heads/main` returned the exact local `HEAD` `cec7fec76ab791424f39d5213b39b536fad48877`. No PR was created. The only remaining untracked file is the original `task.md`; `android-app/local.properties` remains ignored. T1 is complete and work has started on T2.
+
+### L11 — 2026-10-26
+
+Implemented S2 with a Supabase query ordered by `primer_apellido`, a refreshable `LazyColumn` of Material cards, Coil-loaded shaped photos, active/inactive labels, and read-only details containing all fields with registration date/time split. Coil 3.6.3 was incompatible with SDK 36/AGP 9.0.1 (required API 37/AGP 9.1); version 3.3.0 is compatible. The decoder is a `PostgrestResult` member (`decodeList`), not a top-level import. `./gradlew --no-daemon :app:assembleDebug` succeeded (38 tasks); no tests were created or run. Independent S2 verification found the list/details requirements met by inspection; its demo-policy advisory is already explicit in SQL comments at lines 1–2 and README warnings. The updated debug APK is larger (116,508,645 bytes); it remains a Debug APK and S3 export is still pending.

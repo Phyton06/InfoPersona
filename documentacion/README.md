@@ -12,8 +12,10 @@ Aplicación académica Android para capturar información personal, una fotograf
 - Noto Sans incluida como fuente local.
 - El archivo Noto Sans se distribuye bajo SIL Open Font License 1.1.
 - Cliente comunitario Supabase Kotlin para PostgreSQL y Storage.
+- Coil 3 para cargar las fotografías almacenadas por URL en Compose.
 - `android-app/app/src/main/kotlin/mx/edu/personas/ui/screens/PersonFormScreen.kt`: formulario y estado de pantalla.
 - `android-app/app/src/main/kotlin/mx/edu/personas/data/repository/PersonRepository.kt`: carga de fotografía e inserción del registro.
+- `android-app/app/src/main/kotlin/mx/edu/personas/ui/screens/PeopleListDialog.kt`: lista ordenada y detalles de consulta.
 - `android-app/app/src/main/kotlin/mx/edu/personas/utils/LocationProvider.kt`: permiso, coordenadas, altitud MSL y geocodificación inversa.
 - `documentacion/supabase.sql`: tabla, bucket y políticas de demostración.
 
@@ -35,7 +37,7 @@ La tabla `personas` almacena hobbies en JSONB y deja que PostgreSQL asigne el UU
 
 ## Formulario
 
-El formulario usa `TextField`, Checkbox, lista desplegable Material 3, selección de género con iconos y etiquetas visibles, RadioButton, Slider, DatePicker y FilterChip. La edad se compara con la fecha de nacimiento considerando año, mes y día. El selector impide fechas futuras.
+El formulario usa `TextField`, Checkbox, lista desplegable Material 3, selección de género con iconos y etiquetas visibles, RadioButton, Slider, DatePicker y FilterChip. La edad se compara con la fecha de nacimiento considerando año, mes y día. El selector impide fechas futuras. La segunda vista usa `LazyColumn`, muestra la foto y el estado, ordena por primer apellido y abre un diálogo de detalles de solo consulta.
 
 La galería se abre con Photo Picker, que solo concede acceso al elemento elegido. La cámara recibe una URI temporal mediante `FileProvider`. Para ubicación se solicita permiso en primer plano al pulsar el botón; no se pide ubicación en segundo plano. La localidad se obtiene mediante geocodificación inversa. La altitud solo se muestra/guarda cuando Android 14 o posterior y el proveedor informan altitud sobre el nivel medio del mar (MSL); nunca se sustituye por la altitud elipsoidal del GPS.
 

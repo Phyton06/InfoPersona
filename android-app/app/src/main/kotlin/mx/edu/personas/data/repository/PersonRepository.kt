@@ -6,9 +6,11 @@ import kotlinx.coroutines.withContext
 import mx.edu.personas.BuildConfig
 import mx.edu.personas.data.model.PersonDraft
 import mx.edu.personas.data.model.PersonInsert
+import mx.edu.personas.data.model.PersonRecord
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.query.Order
 import io.github.jan.supabase.storage.Storage
 import io.github.jan.supabase.storage.storage
 
@@ -65,5 +67,15 @@ object PersonRepository {
             }
             throw error
         }
+    }
+
+    suspend fun getAll(): List<PersonRecord> {
+        require(BuildConfig.SUPABASE_URL.isNotBlank() && BuildConfig.SUPABASE_PUBLISHABLE_KEY.isNotBlank()) {
+            "Configura la URL y la clave pública de Supabase en local.properties."
+        }
+        // PostgreSQL ordena la consulta para que la lista conserve el orden alfabético solicitado.
+        return supabase.from("personas").select {
+            order("primer_apellido", Order.ASCENDING)
+        }.decodeList<PersonRecord>()
     }
 }

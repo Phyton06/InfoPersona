@@ -70,6 +70,8 @@ dependencies {
   implementation("androidx.compose.material:material-icons-extended")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+  implementation("io.coil-kt.coil3:coil-compose:3.3.0")
+  implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
 
   implementation(platform("io.github.jan-tennert.supabase:bom:3.8.0"))
   implementation("io.github.jan-tennert.supabase:postgrest-kt")

@@ -35,6 +35,7 @@ import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Female
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Male
+import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material.icons.filled.PhotoLibrary
@@ -52,6 +53,8 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
@@ -144,6 +147,7 @@ fun PersonFormScreen() {
     var isSaving by remember { mutableStateOf(false) }
     var isLoadingLocation by remember { mutableStateOf(false) }
     var showDatePicker by remember { mutableStateOf(false) }
+    var showPeopleList by remember { mutableStateOf(false) }
     var maritalMenuExpanded by remember { mutableStateOf(false) }
 
     // Photo Picker entrega acceso solo a la imagen elegida; la app no solicita lectura completa de la galería.
@@ -194,7 +198,26 @@ fun PersonFormScreen() {
 
     // Scaffold aloja el Snackbar para informar éxito o error sin borrar los valores controlados del formulario.
     // Compose vuelve a dibujar las partes afectadas cuando cambia un valor de estado recordado.
-    Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) { contentPadding ->
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        bottomBar = {
+            // La barra inferior ofrece las dos vistas principales sin descartar el estado del formulario.
+            NavigationBar {
+                NavigationBarItem(
+                    selected = !showPeopleList,
+                    onClick = { showPeopleList = false },
+                    icon = { Icon(Icons.Filled.Person, contentDescription = null) },
+                    label = { Text("Registrar") },
+                )
+                NavigationBarItem(
+                    selected = showPeopleList,
+                    onClick = { showPeopleList = true },
+                    icon = { Icon(Icons.Filled.People, contentDescription = null) },
+                    label = { Text("Personas") },
+                )
+            }
+        },
+    ) { contentPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -480,6 +503,10 @@ fun PersonFormScreen() {
         ) {
             DatePicker(state = pickerState, showModeToggle = false)
         }
+    }
+
+    if (showPeopleList) {
+        PeopleListDialog(onDismiss = { showPeopleList = false })
     }
 }
 
