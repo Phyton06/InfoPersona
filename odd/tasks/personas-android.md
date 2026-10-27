@@ -27,8 +27,8 @@ Acceptance: docs accurately describe implemented behavior; APK exists and is non
 
 ## Tasks
 
-- T1 — S1 — inline — complete — `4b0efcc`; `:app:assembleDebug` succeeded; runtime needs the user's Supabase public configuration.
-- T2 — S2 — inline — pending — no commit.
+- T1 — S1 — inline — complete — `4b0efcc`; `:app:assembleDebug` succeeded; initial direct push to remote `main` is `cec7fec`; runtime needs the user's Supabase public configuration.
+- T2 — S2 — inline — in progress — commit pending.
 - T3 — S3 — inline — pending — no commit.
 
 ## Log
@@ -68,3 +68,7 @@ The user selected “1” from the two delivery choices, authorizing the initial
 ### L9 — 2026-10-26
 
 Committed S1 as `4b0efcc` (`feat(personas): add Compose registration and Supabase setup`) on local branch `feature/personas-android`. The Debug build and static verification succeeded; no tests were created or run. The remote `main` has not yet been initialized; the next authorized operation is the user's selected initial direct push to `Phyton06/InfoPersona:main`. `task.md` and ignored `android-app/local.properties` were not included in the commit.
+
+### L10 — 2026-10-26
+
+Performed the user-selected direct initialization push with `git push origin HEAD:main`; GitHub accepted the new branch. `git ls-remote origin refs/heads/main` returned the exact local `HEAD` `cec7fec76ab791424f39d5213b39b536fad48877`. No PR was created. The only remaining untracked file is the original `task.md`; `android-app/local.properties` remains ignored. T1 is complete and work has started on T2.
