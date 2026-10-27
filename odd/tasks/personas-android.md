@@ -112,3 +112,7 @@ Installed Supabase CLI 2.122.0 through the approved local tool-install request. 
 ### L20 — 2026-10-26
 
 The user authorized inspecting and applying `documentacion/supabase.sql` to the supplied project. The read-only MCP project URL check returned a different project from the supplied URL. Stopped before listing tables, reading keys/advisories, or applying SQL; no database/schema/data changes were made. Waiting for the MCP connection to target the supplied project.
+
+### L21 — 2026-10-26
+
+The user asked “cambialo” to switch the active Supabase MCP connection. The available MCP tools expose project URL retrieval but no operation to change the selected project or connection. No Supabase config, project, schema, or credentials were changed or re-read. The user must update the MCP connection to the supplied project URL and notify when ready.
